@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="te">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ahobilam Sevasamithi</title>
+  <style>
+    /* Basic reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    /* Navbar styling */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #5D190D; /* Solid background color */
+      padding: 10px 20px;
+      border-bottom: 2px solid #ccc;
+    }
+
+    .navbar img {
+      height: 50px; /* Adjust height as needed */
+      width: auto;
+    }
+
+    .navbar .heading {
+      font-size: 24px;
+      font-weight: bold;
+      color: white; /* White text color */
+      font-family: 'Poppins', sans-serif; /* Different font for the title */
+      text-transform: uppercase; /* Optional: Uppercase text */
+    }
+
+    /* Menu styling */
+    .navbar .menu {
+      display: flex;
+      gap: 20px; /* Space between menu items */
+    }
+
+    .navbar .menu a {
+      color: white; /* White text color for menu items */
+      text-decoration: none; /* Remove underline */
+      font-family: 'Poppins', sans-serif; /* Same font as the title */
+      font-size: 16px;
+      font-weight: 500;
+      transition: color 0.3s ease; /* Smooth hover effect */
+    }
+
+    .navbar .menu a:hover {
+      color: #F1A945; /* Light orange color on hover */
+    }
+
+    /* Hamburger menu icon */
+    .navbar .hamburger {
+      display: none; /* Hidden by default */
+      flex-direction: column;
+      cursor: pointer;
+    }
+
+    .navbar .hamburger .line {
+      width: 25px;
+      height: 3px;
+      background-color: white;
+      margin: 4px 0;
+    }
+
+    /* Header section styling */
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px;
+      background-color: #f8f8f8; /* Light background color */
+    }
+
+    .header .content {
+      max-width: 50%; /* Limit content width */
+    }
+
+    .header .content h1 {
+      font-size: 28px;
+      font-family: 'Poppins', sans-serif;
+      color: #5D190D; /* Deep maroon color */
+      margin-bottom: 10px;
+    }
+
+    .header .content p {
+      font-size: 16px;
+      font-family: 'Noto Sans Telugu', sans-serif;
+      color: #333; /* Dark gray color */
+      line-height: 1.6;
+    }
+
+    .header .poster img {
+      max-width: 100%; /* Ensure image is responsive */
+      height: auto;
+      border-radius: 10px; /* Rounded corners */
+    }
+
+    /* Body section styling */
+    .body-section {
+      padding: 20px;
+      background-color: #fff; /* White background */
+    }
+
+    .body-section h2 {
+      font-size: 24px;
+      font-family: 'Poppins', sans-serif;
+      color: #5D190D; /* Deep maroon color */
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .events-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive grid */
+      gap: 20px; /* Space between grid items */
+    }
+
+    .event-card {
+      background-color: #f8f8f8; /* Light background for cards */
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+      transition: transform 0.3s ease; /* Smooth hover effect */
+      cursor: pointer; /* Change cursor to pointer */
+    }
+
+    .event-card:hover {
+      transform: translateY(-5px); /* Lift card on hover */
+    }
+
+    .event-card img {
+      width: 100%;
+      height: 200px; /* Fixed height for images */
+      object-fit: cover; /* Ensure images cover the area */
+    }
+
+    .event-card .event-info {
+      padding: 15px;
+    }
+
+    .event-card .event-info h3 {
+      font-size: 20px;
+      font-family: 'Poppins', sans-serif;
+      color: #5D190D; /* Deep maroon color */
+      margin-bottom: 10px;
+    }
+
+    .event-card .event-info p {
+      font-size: 14px;
+      font-family: 'Noto Sans Telugu', sans-serif;
+      color: #555; /* Dark gray color */
+      line-height: 1.5;
+    }
+
+    .event-card .event-info .date {
+      font-size: 12px;
+      color: #888; /* Light gray color */
+      margin-top: 10px;
+    }
+
+    /* Modal styling */
+    .modal {
+      display: none; /* Hidden by default */
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent black background */
+      justify-content: center;
+      align-items: center;
+      z-index: 1000; /* Ensure modal is on top */
+    }
+
+    .modal.active {
+      display: flex; /* Show modal when active */
+    }
+
+    .modal-content {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      max-width: 90%;
+      max-height: 90%;
+      overflow: auto;
+      text-align: center;
+    }
+
+    .modal-content img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 10px;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      color: white;
+      font-size: 30px;
+      cursor: pointer;
+    }
+
+    /* Footer styling */
+    .footer {
+      background-color: #5D190D; /* Deep maroon background */
+      color: white; /* White text color */
+      padding: 20px;
+      text-align: center;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .footer .footer-content {
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+
+    .footer .footer-content div {
+      flex: 1;
+      min-width: 200px;
+    }
+
+    .footer h3 {
+      font-size: 20px;
+      margin-bottom: 10px;
+      color: #F1A945; /* Light orange color for headings */
+    }
+
+    .footer p {
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .footer .copyright {
+      font-size: 12px;
+      color: #ccc; /* Light gray color for copyright text */
+      margin-top: 20px;
+    }
+
+    /* Responsive styles */
+    @media (max-width: 768px) {
+      .navbar .menu {
+        display: none; /* Hide menu on small screens */
+        flex-direction: column;
+        position: absolute;
+        top: 70px; /* Adjust based on navbar height */
+        right: 20px;
+        background-color: #5D190D;
+        padding: 10px;
+        border-radius: 5px;
+      }
+
+      .navbar .menu.active {
+        display: flex; /* Show menu when active */
+      }
+
+      .navbar .hamburger {
+        display: flex; /* Show hamburger icon on small screens */
+      }
+
+      .header {
+        flex-direction: column; /* Stack content vertically on small screens */
+        text-align: center;
+      }
+
+      .header .content {
+        max-width: 100%; /* Full width for content on small screens */
+        margin-bottom: 20px;
+      }
+
+      .header .poster img {
+        max-width: 80%; /* Adjust image size for small screens */
+      }
+
+      .events-grid {
+        grid-template-columns: 1fr; /* Single column on small screens */
+      }
+
+      .footer .footer-content {
+        flex-direction: column; /* Stack footer content vertically on small screens */
+        text-align: center;
+      }
+    }
+  </style>
+  <!-- Add Google Fonts for Poppins and Telugu support -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600&family=Noto+Sans+Telugu&display=swap" rel="stylesheet">
+</head>
+<body>
+  <nav class="navbar">
+    <!-- Left side image -->
+    <img src="./3.png" alt="Left Image">
+
+    <!-- Middle heading in Telugu -->
+    <div class="heading">అహోబిలం సేవాసమితి</div>
+
+    <!-- Right side menu -->
+    <div class="menu" id="menu">
+      <a href="#">Home</a>
+      <a href="#">News & Events</a>
+      <a href="#">About</a>
+      <a href="#">Contact</a>
+      <a href="#">Photo Gallery</a>
+    </div>
+
+    <!-- Hamburger menu icon -->
+    <div class="hamburger" id="hamburger">
+      <div class="line"></div>
+      <div class="line"></div>
+      <div class="line"></div>
+    </div>
+  </nav>
+
+  <!-- Header section -->
+  <div class="header">
+    <!-- Left side content -->
+    <div class="content">
+      <h1>Trust Founder Name</h1>
+      <p>
+        ఈ ట్రస్ట్‌ను స్థాపించిన వ్యక్తి గురించి వివరణ ఇక్కడ రాయండి. ఆయన/ఆమె సాధించిన విజయాలు, సామాజిక సేవలు మరియు ఇతర వివరాలను ఇక్కడ పేర్కొనండి. ఈ వివరణ ట్రస్ట్‌కు ప్రాధాన్యతను ఇస్తుంది మరియు సందర్శకులకు స్పష్టమైన అవగాహనను అందిస్తుంది.
+      </p>
+    </div>
+
+    <!-- Right side poster image -->
+    <div class="poster">
+      <img src="./1.jpg" alt="Poster Image">
+    </div>
+  </div>
+
+  <!-- Body section for Latest Updates and Events -->
+  <div class="body-section">
+    <h2>Latest Updates and Events</h2>
+    <div class="events-grid">
+      <!-- Event 1 -->
+      <div class="event-card" onclick="openModal('./2.jpg')">
+        <img src="./2.jpg" alt="Event 1 Poster">
+        <div class="event-info">
+          <h3>Event Title 1</h3>
+          <p>Brief description of the event. This can include details about the event, its purpose, and any special highlights.</p>
+          <div class="date">Date: October 10, 2023</div>
+        </div>
+      </div>
+
+      <!-- Event 2 -->
+      <div class="event-card" onclick="openModal('event2.jpg')">
+        <img src="event2.jpg" alt="Event 2 Poster">
+        <div class="event-info">
+          <h3>Event Title 2</h3>
+          <p>Brief description of the event. This can include details about the event, its purpose, and any special highlights.</p>
+          <div class="date">Date: October 15, 2023</div>
+        </div>
+      </div>
+
+      <!-- Event 3 -->
+      <div class="event-card" onclick="openModal('event3.jpg')">
+        <img src="event3.jpg" alt="Event 3 Poster">
+        <div class="event-info">
+          <h3>Event Title 3</h3>
+          <p>Brief description of the event. This can include details about the event, its purpose, and any special highlights.</p>
+          <div class="date">Date: October 20, 2023</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer section -->
+  <div class="footer">
+    <div class="footer-content">
+      <!-- Trust Location -->
+      <div>
+        <h3>Trust Location</h3>
+        <p>
+          Ahobilam Sevasamithi,<br>
+          Near Ahobilam Temple,<br>
+          Ahobilam, Andhra Pradesh,<br>
+          India - 518543.
+        </p>
+      </div>
+
+      <!-- Contact Information -->
+      <div>
+        <h3>Contact Information</h3>
+        <p>
+          Phone: +91 9876543210<br>
+          Email: info@ahobilamsevasamithi.com<br>
+          Website: www.ahobilamsevasamithi.com
+        </p>
+      </div>
+
+      <!-- Trust Founders -->
+      <div>
+        <h3>Trust Founders</h3>
+        <p>
+          Founder 1: [Name]<br>
+          Founder 2: [Name]<br>
+          Founder 3: [Name]
+        </p>
+      </div>
+    </div>
+
+    <!-- Copyright Information -->
+    <div class="copyright">
+      &copy; 2023 Copyright by ABS Industries Private Limited, Founder Saikiran.
+    </div>
+  </div>
+
+  <!-- Modal for displaying event posters -->
+  <div class="modal" id="modal">
+    <div class="modal-content">
+      <span class="close-btn" onclick="closeModal()">&times;</span>
+      <img id="modal-image" src="" alt="Event Poster">
+    </div>
+  </div>
+
+  <script>
+    // Toggle menu visibility on hamburger click
+    const hamburger = document.getElementById('hamburger');
+    const menu = document.getElementById('menu');
+
+    hamburger.addEventListener('click', () => {
+      menu.classList.toggle('active');
+    });
+
+    // Modal functionality
+    const modal = document.getElementById('modal');
+    const modalImage = document.getElementById('modal-image');
+
+    function openModal(imageSrc) {
+      modalImage.src = imageSrc; // Set the image source
+      modal.classList.add('active'); // Show the modal
+    }
+
+    function closeModal() {
+      modal.classList.remove('active'); // Hide the modal
+    }
+  </script>
+</body>
+</html>
