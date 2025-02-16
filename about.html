@@ -394,6 +394,191 @@
         padding: 1.5rem;
       }
     }
+    :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --light-bg: #f8f9fa;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.7;
+            margin: 0;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 30px;
+        }
+
+        h1, h2 {
+            color: var(--primary-color);
+            position: relative;
+            padding-left: 20px;
+        }
+
+        h1::before, h2::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 5px;
+            width: 5px;
+            height: 70%;
+            background: var(--secondary-color);
+        }
+
+        .founder-section {
+            display: flex;
+            gap: 40px;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin: 40px 0;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .founder-section:hover {
+            transform: translateY(-5px);
+        }
+
+        .founder-image {
+            width: 350px;
+            height: 400px;
+            border-radius: 15px;
+            object-fit: cover;
+            border: 5px solid var(--light-bg);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .trust-members {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin: 50px 0;
+        }
+
+        .member-card {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .member-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+
+        .member-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--secondary-color);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .member-card:hover::after {
+            transform: scaleX(1);
+        }
+
+        .member-image {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 20px;
+            border: 4px solid var(--secondary-color);
+            padding: 3px;
+        }
+
+        .trust-history {
+            background: linear-gradient(45deg, var(--primary-color), #34495e);
+            color: white;
+            padding: 40px;
+            border-radius: 15px;
+            margin: 50px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .trust-history::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            right: -50px;
+            width: 150px;
+            height: 150px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+        }
+
+        .established-date {
+            background: var(--accent-color);
+            color: white;
+            padding: 10px 25px;
+            border-radius: 30px;
+            display: inline-block;
+            margin: 15px 0;
+            font-weight: 600;
+        }
+
+        .google-map {
+            width: 100%;
+            height: 450px;
+            border: 0;
+            border-radius: 15px;
+            margin: 50px 0;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .section-title {
+            text-align: center;
+            margin: 60px 0;
+            font-size: 2.5em;
+            color: var(--primary-color);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .role-tag {
+            background: var(--accent-color);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            display: inline-block;
+            margin: 10px 0;
+        }
+
+        @media (max-width: 768px) {
+            .founder-section {
+                flex-direction: column;
+                padding: 20px;
+            }
+            
+            .founder-image {
+                width: 100%;
+                height: 300px;
+            }
+
+            .section-title {
+                font-size: 2em;
+            }
+        }
+
+
+
   </style>
   <!-- Add Google Fonts for Poppins and Telugu support -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600&family=Noto+Sans+Telugu&display=swap" rel="stylesheet">
@@ -423,51 +608,67 @@
     </div>
   </nav>
 
-  <div class="events-container">
-    <!-- Latest Event -->
-    <div class="latest-event">
-      <div class="event-content">
-        <div class="event-date">June 25, 2024</div>
-        <h2 class="event-title">Free Medical Camp</h2>
-        <p class="event-description">
-          A free medical camp was organized by our trust in the village. Over 500 people participated and benefited from the camp.
-        </p>
-        <div class="photo-gallery">
-          <img src="event1-1.jpg" class="gallery-image" onclick="openModal('event1-1.jpg')">
-          <img src="event1-2.jpg" class="gallery-image" onclick="openModal('event1-2.jpg')">
-          <img src="event1-3.jpg" class="gallery-image" onclick="openModal('event1-3.jpg')">
+ 
+
+  <div class="container">
+    <h1 class="section-title">About Our Trust</h1>
+
+    <!-- Founder Section -->
+    <div class="founder-section">
+        <img src="founder-image.jpg" alt="Founder Name" class="founder-image">
+        <div>
+            <h2>Our Visionary Founder</h2>
+            <div class="established-date">Established: 2005</div>
+            <h3>Dr. Johnathan Doe</h3>
+            <p>Renowned philanthropist and social innovator, Dr. Doe established the trust with a mission to empower communities through education and sustainable development. With a PhD in Social Work and over 25 years of field experience, he has pioneered numerous initiatives that have impacted over 500,000 lives across Southeast Asia.</p>
+            <ul style="color: #666; margin-top: 20px;">
+                <li>► Recipient of Global Peace Award 2020</li>
+                <li>► UN Humanitarian Advisor</li>
+                <li>► Author of "Empowering Communities"</li>
+            </ul>
         </div>
-      </div>
     </div>
 
-    <!-- Past Events -->
-    <h2 style="color: #2c5f2d; margin-bottom: 2rem;">Past Events</h2>
-    <div class="past-events">
-      <!-- Event 1 -->
-      <div class="event-card" onclick="openModal('event2.jpg')">
-        <img src="event2.jpg" class="event-image">
-        <div class="event-content">
-          <div class="event-date">May 15, 2024</div>
-          <h3 class="event-title">Tree Plantation Drive</h3>
-          <p class="event-description">
-            A tree plantation drive was conducted to promote environmental conservation. Over 500 trees were planted.
-          </p>
+    <!-- Trust Members -->
+    <h2 class="section-title">Our Dedicated Team</h2>
+    <div class="trust-members">
+        <div class="member-card">
+            <img src="member1.jpg" alt="Member Name" class="member-image">
+            <div class="role-tag">Chairperson</div>
+            <h3>Dr. Sarah Johnson</h3>
+            <p>Education Reform Specialist</p>
+            <p>15+ years experience in curriculum development</p>
         </div>
-      </div>
-
-      <!-- Event 2 -->
-      <div class="event-card" onclick="openModal('event3.jpg')">
-        <img src="event3.jpg" class="event-image">
-        <div class="event-content">
-          <div class="event-date">April 1, 2024</div>
-          <h3 class="event-title">Educational Kit Distribution</h3>
-          <p class="event-description">
-            Educational kits were distributed to school-going girls to support their studies.
-          </p>
+        <div class="member-card">
+            <img src="member2.jpg" alt="Member Name" class="member-image">
+            <div class="role-tag">Treasurer</div>
+            <h3>Michael Chen</h3>
+            <p>Financial Strategist</p>
+            <p>Social enterprise funding expert</p>
         </div>
-      </div>
+        <!-- Add more members -->
     </div>
-  </div>
+
+    <!-- Trust History -->
+    <div class="trust-history">
+        <h2>Our Journey</h2>
+        <div class="established-date">Since 2005</div>
+        <p>From humble beginnings in a small community center to becoming a nationally recognized organization, our trust has consistently worked towards creating sustainable change. Key milestones include:</p>
+        <ul>
+            <li>► 2010: Expanded operations to 5 states</li>
+            <li>► 2015: Launched Digital Literacy Initiative</li>
+            <li>► 2020: Reached 1 million beneficiaries</li>
+        </ul>
+    </div>
+
+    <!-- Location Map -->
+    <h2 class="section-title">Find Us</h2>
+    <iframe class="google-map" 
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3888.0374076067264!2d77.49051421482186!3d12.9721909908565!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae3d8ad6dca735%3A0xe8d16c0b3663a1f1!2sBangalore%20Palace!5e0!3m2!1sen!2sin!4v1623746787893!5m2!1sen!2sin" 
+        allowfullscreen="" 
+        loading="lazy">
+    </iframe>
+</div>
 
   <!-- Footer section -->
   <div class="footer">
